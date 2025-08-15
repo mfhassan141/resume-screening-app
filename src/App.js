@@ -116,12 +116,14 @@ function App() {
     if (!selectedFiles.length) return alert("Please upload at least one file!");
     setProcessing(true);
 
-    const allKeywords = [...new Set([
-      ...selectedSkills,
-      ...selectedCerts,
-      ...selectedEdu,
-      ...keywords.split(",").map(k => k.trim()).filter(Boolean)
-    ])].map(k => k.toLowerCase());
+    const allKeywords = [
+      ...new Set([
+        ...selectedSkills,
+        ...selectedCerts,
+        ...selectedEdu,
+        ...keywords.split(",").map(k => k.trim()).filter(Boolean)
+      ])
+    ].map(k => k.toLowerCase());
 
     const jdKeywords = jobDescription
       .replace(/[^a-zA-Z0-9 ]/g, "")
@@ -167,6 +169,28 @@ function App() {
 
   return (
     <div style={{ background: theme.bg, color: theme.text, padding: 20, fontFamily: "Arial" }}>
+      {/* Note Section - Positioned Below Job Description Input */}
+      <div style={{
+        background: theme.yellow,
+        padding: "20px",
+        borderRadius: "10px",
+        marginBottom: "30px",
+        fontWeight: "bold",
+        color: theme.text,
+        textAlign: "center",
+        boxShadow: "0px 5px 10px rgba(0,0,0,0.1)"
+      }}>
+        <h3>Important Note:</h3>
+        <p>
+          This is a free resume screening app using no paid tools. To get the most effective results:
+        </p>
+        <ul style={{ textAlign: "left", marginTop: "10px" }}>
+          <li><strong>1.</strong> **Filter out irrelevant words** from the job description (e.g., salary, experience, location, etc.).</li>
+          <li><strong>2.</strong> **Focus on skill-related keywords** only when submitting job descriptions and resumes.</li>
+          <li><strong>3.</strong> Use **standardized terms** for skills (e.g., "JavaScript" instead of "JS").</li>
+        </ul>
+      </div>
+
       <div style={{ maxWidth: 800, margin: "0 auto", background: theme.panel, padding: 30, borderRadius: 10 }}>
         <img src={logo} alt="Banner" style={{ width: "100%", maxHeight: 350, objectFit: "cover", borderRadius: 10, marginBottom: 20 }} />
         <h2 style={{ color: theme.yellow, textAlign: "center" }}>Resume Screening App</h2>
